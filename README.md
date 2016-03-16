@@ -23,12 +23,13 @@ The [node-lambda-template](https://github.com/RebelMail/node-lambda-template) ex
 
 ## Usage
 
-There are 3 available commands.
+There are 4 available commands.
 
 ```
 node-lambda setup
 node-lambda run
 node-lambda deploy
+node-lambda associate
 ```
 
 ### Commands
@@ -98,9 +99,28 @@ $ node-lambda deploy --help
     -f, --configFile []               Path to file holding secret environment variables (e.g. "deploy.env")`
 ```
 
+#### associate
+
+Associates version of your Amazon Lambda function to an alias. You use aliases to associate different versions
+of lambda functions to versions of your app that calls them. For example your release version could call the
+function with alias "production" and your development version could call one with alias "staging".
+
+```
+$ node-lambda associate --help
+
+  Usage: run [options]
+
+  Options:
+
+    -h, --help                     output usage information
+    -h, --handler [index.handler]  Lambda Handler {index.handler}
+    -j, --eventFile [event.json]   Event JSON File
+```
+
+
 ## Custom Environment Variables
 
-AWS Lambda doesn't let you set environment variables for your function, but in many cases you will need to configure your function with secure values that you don't want to check into version control, for example a DB connection string or encryption key. Use the sample `deploy.env` file in combination with the `--configFile` flag to set values which will be prepended to your compiled Lambda function as `process.env` environment variables before it gets uploaded to S3. 
+AWS Lambda doesn't let you set environment variables for your function, but in many cases you will need to configure your function with secure values that you don't want to check into version control, for example a DB connection string or encryption key. Use the sample `deploy.env` file in combination with the `--configFile` flag to set values which will be prepended to your compiled Lambda function as `process.env` environment variables before it gets uploaded to S3.
 
 ## Other AWS Lambda Tools Projects
 

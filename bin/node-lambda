@@ -22,6 +22,8 @@ var AWS_TIMEOUT = process.env.AWS_TIMEOUT || 60;
 var AWS_DESCRIPTION = process.env.AWS_DESCRIPTION || '';
 var AWS_RUNTIME = process.env.AWS_RUNTIME || 'nodejs';
 var AWS_FUNCTION_VERSION = process.env.AWS_FUNCTION_VERSION || '';
+var AWS_FUNCTION_ALIAS = process.env.AWS_FUNCTION_ALIAS || '';
+var AWS_CREATE_ALIAS = process.env.AWS_CREATE_ALIAS || '';
 var EVENT_FILE = process.env.EVENT_FILE || 'event.json';
 
 program
@@ -47,6 +49,16 @@ program
     'Path to file holding secret environment variables (e.g. "deploy.env")', CONFIG_FILE)
   .action(function (prg) {
     lambda.deploy(prg);
+  });
+
+program
+  .version(lambda.version)
+  .command('associate')
+  .description('Associate function version with alias')
+  .option('-a, --alias [' + AWS_FUNCTION_ALIAS + ']', 'Lambda Function Alias', AWS_FUNCTION_ALIAS)
+  .option('-f, --function-version [' + AWS_FUNCTION_VERSION + ']', 'Lambda Function Version', AWS_FUNCTION_VERSION)
+  .action(function (prg) {
+     lambda.associate(prg);
   });
 
 program
