@@ -56,7 +56,7 @@ program
   .command('associate')
   .description('Associate function version with alias')
   .option('--alias [' + AWS_FUNCTION_ALIAS + ']', 'Lambda Function Alias', AWS_FUNCTION_ALIAS)
-  .option('--function-version [' + AWS_FUNCTION_VERSION + ']', 'Lambda Function Version', AWS_FUNCTION_VERSION)
+  .option('--functionVersion [' + AWS_FUNCTION_VERSION + ']', 'Lambda Function Version', AWS_FUNCTION_VERSION)
   .option('--functionName [' + AWS_FUNCTION_NAME + ']', 'Lambda FunctionName', AWS_FUNCTION_NAME)
   .action(function (prg) {
      lambda.associate(prg);
